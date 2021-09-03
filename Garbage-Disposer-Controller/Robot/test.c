@@ -54,50 +54,6 @@ void Test_LED(void)
 
 
 /******************************************************************************
-KEY1按下LED1亮，松开LED1灭
-KEY2按下再松开LED2翻转
-*******************************************************************************/
-void Test_KEY(void)
-{
-	extern int key1_state,key2_state;
-	//设置中断优先级分组
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);    
-
-	//JTAG口设置
-	JTAG_Set(JTAG_SWD_DISABLE);  //关闭JTAG接口 
-	JTAG_Set(SWD_ENABLE);  //打开SWD接口 可以利用主板的SWD接口调试 
-	
-	//软件延时初始化
-	DELAY_Init(); 	
-	LED_Init();  	
-	
-	//初始化
-	KEY_Init();
-	
-	while (1) 
-	{	
-		KEY_Scan();
-		//KEY1按下LED1亮，松开LED1灭
-		if(key1_state == KEY_DOWN)
-		{
-			LED_Green_On();  
-		}
-		if(key1_state == KEY_UP)
-		{
-			LED_Green_Off();
-		}
-		//KEY2按下再松开LED2翻转
-		if(key2_state == KEY_DOWNUP)
-		{
-			LED_Blue_Toggle(); 
-		}
-		delay_ms(10);
-	}
-}	
-
-
-
-/******************************************************************************
 控制8路舵机60度、90度、120度间隔运动
 *******************************************************************************/
 void Test_Servo(void)
@@ -114,10 +70,7 @@ void Test_Servo(void)
 	LED_Init();
 	
 	//初始化
-	Servo_Dangban_Init();
-	Servo_Laji_Init();
-	Servo_Kaimen_Init();
-//	SERVO_GH_Init();
+	Servo_Init();
 
 	while (1) 
 	{		
@@ -165,7 +118,7 @@ void Test_Motor_PWM(void)
 	LED_Init();  
 	
 	//初始化
-	MOTOR_Init(10);  //设置电机控制PWM频率为10K
+	Motor_Init(10);  //设置电机控制PWM频率为10K
 	
 	for(temp=0; temp>=-2000; temp--)
 	{

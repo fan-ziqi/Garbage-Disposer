@@ -5,7 +5,7 @@
   * @参  数  freq_khz:PWM输出频率，范围1~20,单位KHz
   * @返回值  无
   */
-void MOTOR_Init(uint8_t freq_khz)
+void Motor_Init(uint8_t freq_khz)
 { 
 	
 	GPIO_InitTypeDef GPIO_InitStructure; 

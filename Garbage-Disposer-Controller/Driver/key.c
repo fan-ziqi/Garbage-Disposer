@@ -2,7 +2,6 @@
 #include "delay.h"
 #include "sys.h"
 
-int key1_state=0,key2_state=0;
 
 /**
   * @简  述  KEY 按键初始化
@@ -14,57 +13,14 @@ void KEY_Init(void)
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
 	//使配置GPIO
- 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_8;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; 
- 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	
-	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC|RCC_APB2Periph_AFIO,ENABLE );
-    PWR_BackupAccessCmd( ENABLE );/* 允许修改RTC和后备寄存器*/
-    RCC_LSEConfig( RCC_LSE_OFF ); /* 关闭外部低速时钟,PC14+PC15可以用作普通IO*/
-    BKP_TamperPinCmd(DISABLE);  /* 关闭入侵检测功能,PC13可以用作普通IO*/
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;          
-    GPIO_Init(GPIOC, &GPIO_InitStructure);
-	PWR_BackupAccessCmd(DISABLE);/* 禁止修改RTC和后备寄存器*/
-	
-}
+ 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF,ENABLE);
+	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //TODO这里需要改一下，浮空输入或者上拉输入
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+ 	GPIO_Init(GPIOF, &GPIO_InitStructure);
 
 
-
-/**
-  * @简  述  KEY 获取按键值
-  * @参  数  无
-  * @返回值  按键值，按键按下为1，抬起为0
-  */
-void KEY_Scan(void)
-{
-	if(PAin(8) == 0)		
-	{
-		delay_ms(10);
-		
-		if(PAin(8) == 0)
-		{
-			key1_state=KEY_DOWN;
-		}
-		else key1_state=KEY_UP;
-	}
-	else key1_state=KEY_UP;
 	
-	if(PCin(13) == 0)		
-	{
-		delay_ms(10);
-		
-		if(PCin(13) == 0)
-		{
-			key2_state=KEY_DOWN;
-			delay_ms(100);
-			if(PCin(13) == 1) key2_state=KEY_DOWNUP;
-		}
-		else key2_state=KEY_UP;
-	}
-	else key2_state=KEY_UP;
 }
 
 
@@ -76,7 +32,7 @@ void KEY_Scan(void)
 */
 u8 KEY_Dangban_Down_L(void)
 {
-    if (KEY1 == 0)
+    if ( GPIO_ReadInputDataBit(GPIOF, GPIO_Pin_0) == 0)
     {
         return 1;
     }
@@ -85,7 +41,7 @@ u8 KEY_Dangban_Down_L(void)
 
 u8 KEY_Dangban_Down_R(void)
 {
-    if (KEY2 == 0)
+    if ( GPIO_ReadInputDataBit(GPIOF, GPIO_Pin_1) == 0)
     {
         return 1;
     }
@@ -94,7 +50,7 @@ u8 KEY_Dangban_Down_R(void)
 
 u8 KEY_Dangban_Up_L(void)
 {
-    if (KEY3 == 0)
+    if ( GPIO_ReadInputDataBit(GPIOF, GPIO_Pin_2) == 0)
     {
         return 1;
     }
@@ -103,7 +59,7 @@ u8 KEY_Dangban_Up_L(void)
 
 u8 KEY_Dangban_Up_R(void)
 {
-    if (KEY4 == 0)
+    if ( GPIO_ReadInputDataBit(GPIOF, GPIO_Pin_3) == 0)
     {
         return 1;
     }

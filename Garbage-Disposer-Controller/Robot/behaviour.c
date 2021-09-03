@@ -10,8 +10,11 @@
 #include "motor.h"    //直流电机调速控制
 #include "servo.h"    //舵机控制
 #include "tim.h"      //定时器
+#include "step.h"
 
+#define SPEED_OF_DANGBAN 1000
 #define TIME_OF_LENGQUE 10000
+#define TIME_OF_YOUSHENG 1000
 #define TIME_OF_DANGBAN_DOWN 5000
 #define SPEED_OF_FENSUI 1000
 #define TIME_OF_FENSUI 20000
@@ -46,7 +49,8 @@ void GuYeFenLi(void)
 	//把挡板升起来
 	while((!KEY_Dangban_Up_L())||(!KEY_Dangban_Up_R()))
     {
-		//TODO挡板往上走
+		Motor_Dangban_L_SetSpeed(SPEED_OF_DANGBAN);
+		Motor_Dangban_R_SetSpeed(SPEED_OF_DANGBAN);
 	}
 	
 	//开启制冷片和风扇
@@ -54,8 +58,11 @@ void GuYeFenLi(void)
 	delay_ms(TIME_OF_LENGQUE);
 	
 	//升起处理油的装置
-	//TODO步进电机
-	
+	Step_Fenli_L_Move(ZHENG);
+	Step_Fenli_R_Move(ZHENG);
+	delay_ms(TIME_OF_YOUSHENG);
+	Step_Fenli_L_Move(TING);
+	Step_Fenli_R_Move(TING);
 }
 
 //第二步，粉碎
@@ -66,7 +73,8 @@ void FenSui(void)
 	Servo_Dangban_R_SetAngle(0);
 	
 	//然后再把挡板降下去
-	//TODO挡板往下走
+	Motor_Dangban_L_SetSpeed(SPEED_OF_DANGBAN);
+	Motor_Dangban_R_SetSpeed(SPEED_OF_DANGBAN);
 	delay_ms(TIME_OF_DANGBAN_DOWN);
 	
 	//开始粉碎
@@ -79,8 +87,14 @@ void FenSui(void)
 void DianDianLe(void)
 {
 	//颠颠乐
-	//TODO步进电机
-	delay_ms(TIME_OF_DIANDIANLE);//TODO颠颠乐时间
+	for(int i=0;i<=10;i++)
+	{
+		Step_Dian_Move(ZHENG);
+		delay_ms(TIME_OF_DIANDIANLE);//TODO颠颠乐时间
+		Step_Dian_Move(FAN);
+		delay_ms(TIME_OF_DIANDIANLE);//TODO颠颠乐时间
+	}
+	Step_Dian_Move(TING);
 	
 	//颠颠乐开门
 	Servo_Kaimen_SetAngle(600);//TODO角度

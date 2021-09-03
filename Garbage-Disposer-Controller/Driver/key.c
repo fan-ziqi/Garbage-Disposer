@@ -28,7 +28,6 @@ void KEY_Init(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;          
     GPIO_Init(GPIOC, &GPIO_InitStructure);
 	PWR_BackupAccessCmd(DISABLE);/* 禁止修改RTC和后备寄存器*/
-    //BKP_ITConfig(DISABLE);       /* 禁止TAMPER 中断*/
 	
 }
 
@@ -68,3 +67,45 @@ void KEY_Scan(void)
 	else key2_state=KEY_UP;
 }
 
+
+/**
+@func: 触点开关检测
+@param: None
+@return: X轴触点开关按下时返回1，否则返回0
+@brief: None
+*/
+u8 KEY_Dangban_Down_L(void)
+{
+    if (KEY1 == 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+u8 KEY_Dangban_Down_R(void)
+{
+    if (KEY2 == 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+u8 KEY_Dangban_Up_L(void)
+{
+    if (KEY3 == 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+u8 KEY_Dangban_Up_R(void)
+{
+    if (KEY4 == 0)
+    {
+        return 1;
+    }
+    return 0;
+}

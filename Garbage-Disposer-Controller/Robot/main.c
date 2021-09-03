@@ -10,11 +10,11 @@
 #include "tim.h"      //定时器
 
 #include "test.h"
-
+#include "behaviour.h"
 
 //主要函数声明
 
-void ROBOT_MoveCtl(void);  //运动控制函数  
+//void ROBOT_MoveCtl(void);  //运动控制函数  
 
 /**
   * @简  述  程序主函数
@@ -32,7 +32,7 @@ int main(void)
 //	Test_Motor_PWM();
 
 	
-	uint8_t cnt = 1;  //定时器计数
+//	uint8_t cnt = 1;  //定时器计数
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);   //设置中断分组
 
@@ -57,25 +57,33 @@ int main(void)
 	
 	//绿灯点亮，提示运行
 	LED_Green_On();
+	
+	
+	All_Init();
+	
+	
 
+	//从这里开始
+	GuYeFenLi();
+	FenSui();
+	DianDianLe();
+		
 	while(1)
 	{
-		//100HZ控制频率
-		if(TIM6_CheckIrqStatus())
-		{		
-
-			
-			//50HZ执行频率
-			if(cnt%2 == 0)
-			{
-				
-				//运动控制
-				
-			}
-			
-			//计数器累加
-			cnt++;
-		}
+		;
+		
+		
+//		//100HZ控制频率
+//		if(TIM6_CheckIrqStatus())
+//		{		
+//			//50HZ执行频率
+//			if(cnt%2 == 0)
+//			{
+//				;
+//			}
+//			//计数器累加
+//			cnt++;
+//		}
 	}
 }
 

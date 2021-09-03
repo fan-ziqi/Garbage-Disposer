@@ -124,34 +124,22 @@ void Test_Servo(void)
 //		printf("*60¶È...... \r\n");		
 		Servo_Dangban_L_SetAngle(600);
 		Servo_Dangban_R_SetAngle(600);
-		Servo_Laji_L_SetAngle   (600);
-		Servo_Laji_R_SetAngle   (600);
+		Servo_Laji_SetAngle     (600);
 		Servo_Kaimen_SetAngle   (600);
-		Servo_test_SetAngle     (600);
-//		SERVO_G_SetAngle(600);
-//		SERVO_H_SetAngle(600);
 		delay_ms(1000);
 		
 //		printf("*90¶È...... \r\n");
 		Servo_Dangban_L_SetAngle(900);
 		Servo_Dangban_R_SetAngle(900);
-		Servo_Laji_L_SetAngle   (900);
-		Servo_Laji_R_SetAngle   (900);
+		Servo_Laji_SetAngle     (900);
 		Servo_Kaimen_SetAngle   (900);
-		Servo_test_SetAngle     (900);
-//		SERVO_G_SetAngle(900);
-//		SERVO_H_SetAngle(900);
 		delay_ms(1000);
 		
 //		printf("*120¶È...... \r\n");
 		Servo_Dangban_L_SetAngle(1200);
 		Servo_Dangban_R_SetAngle(1200);
-		Servo_Laji_L_SetAngle   (1200);
-		Servo_Laji_R_SetAngle   (1200);
+		Servo_Laji_SetAngle     (1200);
 		Servo_Kaimen_SetAngle   (1200);
-		Servo_test_SetAngle     (1200);
-//		SERVO_G_SetAngle(1200);
-//		SERVO_H_SetAngle(1200);
 		delay_ms(1000);
 	}
 }		

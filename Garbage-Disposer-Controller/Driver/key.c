@@ -15,7 +15,7 @@ void KEY_Init(void)
 	//使配置GPIO
  	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF,ENABLE);
 	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //TODO这里需要改一下，浮空输入或者上拉输入
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //TODO这里需要改一下，浮空输入或者上拉输入
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  	GPIO_Init(GPIOF, &GPIO_InitStructure);
 

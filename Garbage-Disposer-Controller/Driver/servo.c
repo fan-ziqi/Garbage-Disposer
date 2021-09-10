@@ -98,6 +98,6 @@ void Servo_Kaimen_SetAngle(uint16_t angle)
 		angle = 1800;
 	
 	angle = 1.111f*angle + 500;
-	TIM_SetCompare4(TIM1,angle);
+	TIM_SetCompare4(TIM2,angle);
 }
 

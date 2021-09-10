@@ -41,6 +41,7 @@ int main(void)
 	
 	KEY_Init();
 	Motor_Init(10);
+	Step_Init(10);
 	DELAY_Init();  
 	Servo_Init();
 	
@@ -61,8 +62,10 @@ int main(void)
 //	//绿灯点亮，提示运行
 //	LED_Green_On();
 
-	All_Init();
+//for(int i=1;i<=3;i++) delay_ms(1000);
 
+	All_Init();
+	
 	//从这里开始
 	GuYeFenLi();
 	FenSui();
@@ -70,6 +73,28 @@ int main(void)
 		
 	while(1)
 	{
+//		TIM_SetCompare1(TIM2,1500);
+//		TIM_SetCompare2(TIM2,1500);
+//		TIM_SetCompare3(TIM2,1500);
+//		TIM_SetCompare4(TIM2,1500);
+		
+
+		
+		
+//		TIM_SetCompare1(TIM3,500);
+//		TIM_SetCompare2(TIM3,500);
+//		TIM_SetCompare3(TIM3,1000);
+//		TIM_SetCompare4(TIM3,1000);
+		
+//		TIM_SetCompare1(TIM8,1000);
+//		TIM_SetCompare2(TIM8,1000);
+//		TIM_SetCompare3(TIM8,1000);
+//		TIM_SetCompare4(TIM8,1000);
+		
+//		GPIO_ResetBits(GPIOC, GPIO_Pin_0);
+//		delay_ms(500);
+//		GPIO_SetBits(GPIOC, GPIO_Pin_0);
+//		delay_ms(500);
 		;
 		
 		

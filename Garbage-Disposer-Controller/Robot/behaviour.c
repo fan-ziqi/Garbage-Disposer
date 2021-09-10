@@ -24,12 +24,14 @@
 void All_Init(void)
 {
 	//把限位开关支起来
-	Servo_Dangban_L_SetAngle(600);//TODO改角度
-	Servo_Dangban_R_SetAngle(600);
+	Servo_Dangban_L_SetAngle(1000);//TODO改角度
+	Servo_Dangban_R_SetAngle(1000);
 	
 	//然后再把挡板降下来
-	while((!KEY_Dangban_Down_L())||(!KEY_Dangban_Down_R()))
+	while( (!KEY_Dangban_Down_L()) && (!KEY_Dangban_Down_R()) )
     {
+		Motor_Dangban_L_SetSpeed(-SPEED_OF_DANGBAN);
+		Motor_Dangban_R_SetSpeed(-SPEED_OF_DANGBAN);
 		//TODO挡板往下走
 	}
 	
@@ -47,7 +49,7 @@ void GuYeFenLi(void)
 {
 	//固液分离
 	//把挡板升起来
-	while((!KEY_Dangban_Up_L())||(!KEY_Dangban_Up_R()))
+	while( (!KEY_Dangban_Up_L()) && (!KEY_Dangban_Up_R()) )
     {
 		Motor_Dangban_L_SetSpeed(SPEED_OF_DANGBAN);
 		Motor_Dangban_R_SetSpeed(SPEED_OF_DANGBAN);
